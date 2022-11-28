@@ -1,7 +1,7 @@
 import CamViewer from "./CamViewer";
 import Info from "./Info";
 import { DiaryData } from "../App";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 const CreateData = () => {
   const data = useContext(DiaryData).imgData;

@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import { DispatchDiaryData } from "../App";
 import Webcam from "react-webcam";
 import Button from "./Button";
-import GetLocate from "./api/GetLocate";
 
 const videoConstraints = {
   width: 1280,
@@ -13,7 +12,6 @@ const videoConstraints = {
 
 const CamViewer = () => {
   const setImgData = useContext(DispatchDiaryData).setImgData;
-  const locationData = GetLocate();
 
   return (
     <div>
@@ -35,11 +33,6 @@ const CamViewer = () => {
           />
         )}
       </Webcam>
-      <>
-        {locationData.loaded
-          ? JSON.stringify(locationData)
-          : "Location data not available yet."}
-      </>
     </div>
   );
 };

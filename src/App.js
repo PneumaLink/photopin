@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routers/Home";
-import GetLocal from "./components/api/GetLocate";
 
 export const DiaryData = React.createContext();
 export const DispatchDiaryData = React.createContext();
@@ -25,8 +24,9 @@ function App() {
 
   const dataId = useRef(0);
 
-  const onCreate = ({ img, tag, mainText, locate }) => {
-    const dateTime = new Date();
+  const onCreate = ({ img, tag, mainText }) => {
+    // const dateTime = new Date();
+    const dateTime = "Sample Data";
 
     dispatch({
       type: "CREATE",
@@ -37,7 +37,6 @@ function App() {
         img: img,
         createTime: dateTime,
         editTime: dateTime,
-        locate: locate,
       },
     });
     dataId.current += 1;

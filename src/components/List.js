@@ -11,12 +11,16 @@ const List = () => {
       {diaryData.length > 0 ? (
         diaryData.map((it) => (
           <div key={it.id}>
-            <img src={it.img} />
+            {it.img ? <img src={it.img} /> : <p>No image Data</p>}
             <p>{it.mainText}</p>
             <p>{it.tag}</p>
             <p>create : {it.createTime}</p>
             <p>last edit : {it.editTime}</p>
-            <Map width="500px" height="400px" localData={it.locate} />
+            {it.locate ? (
+              <Map width="500px" height="400px" localData={it.locate} />
+            ) : (
+              <p>No Location Data</p>
+            )}
           </div>
         ))
       ) : (
