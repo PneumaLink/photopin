@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import WebCam from "../components/WebCam";
-import Input from "../components/Input";
+import WebCam from "../components/part/WebCam";
+import DiaryInputSet from "../components/DiaryInputSet";
 
 const CreateNewData = () => {
   return (
@@ -8,7 +8,7 @@ const CreateNewData = () => {
       <Link to="/">Go to Home</Link>
       <h1>Create New Data</h1>
       <WebCam />
-      <Input />
+      <DiaryInputSet />
     </div>
   );
 };

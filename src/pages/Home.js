@@ -7,7 +7,7 @@
 */
 
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../components/part/Button";
 import DataViewer from "../components/DataViewer";
 
 const Home = () => {
