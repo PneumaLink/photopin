@@ -44,6 +44,8 @@ const DiaryInputSet = ({ img }) => {
       />
       <br />
       <Button innerText={<Link to="/">"등록"</Link>} onClick={createPin} />
+      <br />
+      <img src={img} />
     </div>
   );
 };

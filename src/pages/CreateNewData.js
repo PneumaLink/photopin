@@ -10,8 +10,7 @@ const CreateNewData = () => {
     <div>
       <Link to="/">Go to Home</Link>
       <h1>Create New Data</h1>
-      <WebCam setImg={setImg} />
-      <DiaryInputSet img={img} />
+      {img ? <DiaryInputSet img={img} /> : <WebCam setImg={setImg} />}
     </div>
   );
 };
