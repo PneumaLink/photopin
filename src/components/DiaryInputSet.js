@@ -7,12 +7,11 @@ import { DispatchFunctions } from "../App";
 
 const defaulteTagList = ["일상", "운동", "특별", "중요"];
 
-const DiaryInputSet = () => {
+const DiaryInputSet = ({ img }) => {
   const dispatch = useContext(DispatchFunctions);
 
   const [tagList, setTagList] = useState(defaulteTagList);
   const [mainText, setMainText] = useState("");
-  const [img, setImg] = useState(null);
   const [location, setLocation] = useState({ lat: null, lon: null });
   const [tag, setTag] = useState(tagList[0]);
 

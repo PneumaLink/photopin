@@ -17,7 +17,7 @@ const DataViewer = () => {
         ? pinList.map((it) => (
             <div key={it.id}>
               <p>{it.id}</p>
-              <p>{it.img}</p>
+              <img src={it.img} />
               <p>{it.tag}</p>
               <p>{it.mainText}</p>
               <p>{it.createTime.toString()}</p>

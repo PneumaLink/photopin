@@ -7,13 +7,13 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-const WebCam = () => {
+const WebCam = ({ setImg }) => {
   const getScreenshot = ({ getScreenshot }) => (
     <Button
       onClick={() => {
-        console.log(getScreenshot());
+        setImg(getScreenshot());
       }}
-      innerText={"핀 꼿기"}
+      innerText={"!찰칵!"}
     />
   );
 
