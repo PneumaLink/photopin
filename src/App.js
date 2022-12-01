@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useReducer, useRef, useEffect } from "react";
 import pinReducer from "./functions/pinReducer";
 import dayReducer from "./functions/dayReducer";
+import Detail from "./pages/Deatil";
 
 export const dayDataContext = React.createContext();
 export const DispatchFunctions = React.createContext();
@@ -62,6 +63,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/createNewData" element={<CreateNewData />}></Route>
+            <Route path="/detail/:id" element={<Detail />}></Route>
           </Routes>
         </BrowserRouter>
       </dayDataContext.Provider>
