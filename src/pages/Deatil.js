@@ -1,27 +1,42 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { dayDataContext } from "../App";
+import Button from "../components/part/Button";
+import MapViewer from "../components/part/MapViewer";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 const Detail = () => {
   const { id } = useParams();
   const targetData = useContext(dayDataContext).pinList;
-  const findTarget = (it) => it.id == id;
+  const findTarget = (it) => it.id.toString() === id;
   const newData = targetData.find(findTarget);
+  const [editMod, setEditMod] = useState(false);
+
+  const editEvent = () => {
+    console.log("evnet Edit");
+  };
+
+  const removeEvent = () => {
+    console.log("evnet Remove");
+  };
 
   return (
     <div>
       <h2>Detail</h2>
       {newData ? (
         <div>
+          <Button innerText={"수정"} onClick={editEvent} />
+          <Button innerText={"삭제"} onClick={removeEvent} />
           <p>{newData.id}</p>
           <p>{newData.tag}</p>
           <p>{newData.mainText}</p>
           <p>{newData.createTime.toString()}</p>
           <p>{newData.editTime.toString()}</p>
+          <img src={newData.img} width="100%" alt="pinImage"></img>
           <p>
-            {newData.location.lat} : {newData.location.lon}
+            {newData.location.lat} : {newData.location.lng}
           </p>
-          <img src={newData.img}></img>
+          <MapViewer lat={newData.location.lat} lng={newData.location.lng} />
         </div>
       ) : (
         "데이터가 없네? 이럴리가 없는데?"

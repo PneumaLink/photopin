@@ -2,8 +2,8 @@ import Webcam from "react-webcam";
 import Button from "./Button";
 
 const videoConstraints = {
-  width: 1280,
-  height: 720,
+  width: 1920,
+  height: 1080,
   facingMode: "user",
 };
 
@@ -20,9 +20,9 @@ const WebCam = ({ setImg }) => {
   return (
     <Webcam
       audio={false}
-      height={720}
+      // height={"auto"}
       screenshotFormat="image/jpeg"
-      width={1280}
+      width={"100%"}
       videoConstraints={videoConstraints}
     >
       {getScreenshot}

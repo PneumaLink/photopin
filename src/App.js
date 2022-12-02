@@ -2,7 +2,7 @@ import "./style/App.css";
 import Home from "./pages/Home";
 import CreateNewData from "./pages/CreateNewData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useReducer, useRef, useEffect } from "react";
+import React, { useReducer, useRef } from "react";
 import pinReducer from "./functions/pinReducer";
 import Detail from "./pages/Deatil";
 
