@@ -7,8 +7,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { dayDataContext } from "../App";
-import Detail from "../pages/Deatil";
-import Button from "./part/Button";
 
 const DataViewer = () => {
   const pinList = useContext(dayDataContext).pinList;
