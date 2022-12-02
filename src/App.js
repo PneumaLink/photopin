@@ -4,7 +4,6 @@ import CreateNewData from "./pages/CreateNewData";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useReducer, useRef, useEffect } from "react";
 import pinReducer from "./functions/pinReducer";
-import dayReducer from "./functions/dayReducer";
 import Detail from "./pages/Deatil";
 
 export const dayDataContext = React.createContext();
@@ -12,7 +11,6 @@ export const DispatchFunctions = React.createContext();
 
 function App() {
   const [pinList, pinDispatch] = useReducer(pinReducer, []);
-  const [dayList, dayDispatch] = useReducer(dayReducer, []);
 
   const dataId = useRef(0);
 
