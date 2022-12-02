@@ -18,7 +18,9 @@ const Detail = () => {
           <p>{newData.mainText}</p>
           <p>{newData.createTime.toString()}</p>
           <p>{newData.editTime.toString()}</p>
-          <p>{newData.location.toString()}</p>
+          <p>
+            {newData.location.lat} : {newData.location.lon}
+          </p>
           <img src={newData.img}></img>
         </div>
       ) : (

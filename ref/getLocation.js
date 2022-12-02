@@ -26,9 +26,7 @@ const getLocation = async () => {
     console.log(err);
   };
   // 사용자의 현재 위치 정보를 요청합니다.
-  console.log(
-    typeof navigator.geolocation.getCurrentPosition(onSuccess, onError),
-  );
+  navigator.geolocation.getCurrentPosition(onSuccess, onError);
 };
 
 export default getLocation;
