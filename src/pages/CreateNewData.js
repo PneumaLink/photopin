@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 
 const CreateNewData = () => {
   const [img, setImg] = useState(null);
-  const [location, setLocation] = useState({ lat: null, lng: null });
+  const [location, setLocation] = useState(null);
 
   useEffect(() => {
     const onSuccess = (result) => {
-      console.log("위치정보 가져오기 준비 완료!");
       const { coords } = result;
       setLocation({ lat: coords.latitude, lng: coords.longitude });
     };
@@ -19,12 +18,23 @@ const CreateNewData = () => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
+  useEffect(() => {
+    if (location) console.log(`location ${location.lat} : ${location.lng}`);
+    else {
+      console.log(location);
+    }
+  }, [location]);
+
   return (
     <div>
       <Link to="/">Go to Home</Link>
       <h1>Create New Data</h1>
       {img ? (
-        <DiaryInputSet img={img} location={location} />
+        location ? (
+          <DiaryInputSet img={img} location={location} />
+        ) : (
+          <h1>위치정보 준비중...</h1>
+        )
       ) : (
         <WebCam setImg={setImg} />
       )}
