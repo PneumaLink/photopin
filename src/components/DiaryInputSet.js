@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "./part/Button";
 import Input from "./part/Input";
 import SelectBox from "./part/SelectBox";
@@ -16,6 +16,8 @@ const DiaryInputSet = ({ img }) => {
   const [mainText, setMainText] = useState("");
   const [tag, setTag] = useState(tagList[0]);
   const [locationState, setLocationState] = useState(false);
+
+  const goToHome = useNavigate();
 
   useEffect(() => {
     if (location.state === "success") {
@@ -34,7 +36,7 @@ const DiaryInputSet = ({ img }) => {
   const createPin = () => {
     if (locationState) {
       dispatch.onCreate({ tag, mainText, img, location: location.locate });
-    } else {
+      goToHome("/");
     }
   };
 

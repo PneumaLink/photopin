@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import React, { useReducer, useRef } from "react";
 import pinReducer from "./functions/pinReducer";
 import Detail from "./pages/Deatil";
+import Layout from "./components/Layout";
 
 export const dayDataContext = React.createContext();
 export const DispatchFunctions = React.createContext();
@@ -59,9 +60,11 @@ function App() {
       <dayDataContext.Provider value={{ pinList }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/createNewData" element={<CreateNewData />}></Route>
-            <Route path="/detail/:id" element={<Detail />}></Route>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/createNewData" element={<CreateNewData />}></Route>
+              <Route path="/detail/:id" element={<Detail />}></Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </dayDataContext.Provider>

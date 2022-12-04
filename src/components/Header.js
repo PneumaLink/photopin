@@ -5,7 +5,7 @@ const Header = () => {
   const navigateHome = useNavigate();
 
   return (
-    <Header>
+    <header>
       <h2>I'm Header!</h2>
       <Button
         innerText={"Home"}
@@ -13,7 +13,7 @@ const Header = () => {
           navigateHome("/");
         }}
       />
-    </Header>
+    </header>
   );
 };
 

@@ -5,23 +5,21 @@
   
   저장된 사용자 개인 일과기록 간편 출력
 */
-
-import { Link } from "react-router-dom";
 import Button from "../components/part/Button";
 import DataViewer from "../components/DataViewer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const goToCreateNewData = useNavigate();
+
   const onCreate = () => {
-    console.log("버튼 눌림");
+    goToCreateNewData("/createNewData");
   };
 
   return (
     <div className="home">
       <h1>Home</h1>
-      <Button
-        onClick={onCreate}
-        innerText={<Link to="/createNewData">새로운데이터</Link>}
-      />
+      <Button onClick={onCreate} innerText={"새로운데이터"} />
       <DataViewer />
     </div>
   );
