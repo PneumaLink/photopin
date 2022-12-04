@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { dayDataContext } from "../App";
 import Button from "../components/part/Button";
 import MapViewer from "../components/part/MapViewer";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 const Detail = () => {
   const { id } = useParams();

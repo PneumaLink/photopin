@@ -1,25 +1,41 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "./part/Button";
 import Input from "./part/Input";
 import SelectBox from "./part/SelectBox";
 import { DispatchFunctions } from "../App";
+import { locationContext } from "../pages/CreateNewData";
 
 const defaulteTagList = ["일상", "운동", "특별", "중요"];
 
-const DiaryInputSet = ({ img, location }) => {
+const DiaryInputSet = ({ img }) => {
   const dispatch = useContext(DispatchFunctions);
+  const location = useContext(locationContext).location;
 
   const [tagList, setTagList] = useState(defaulteTagList);
   const [mainText, setMainText] = useState("");
   const [tag, setTag] = useState(tagList[0]);
+  const [locationState, setLocationState] = useState(false);
+
+  useEffect(() => {
+    if (location.state === "success") {
+      setLocationState(true);
+      console.log("위치정보 확인 성공!");
+    } else {
+      setLocationState(false);
+      console.log("위치정보 확인 중...");
+    }
+  }, [location]);
 
   const tagSelecter = (e) => {
     setTag(e.target.value);
   };
 
   const createPin = () => {
-    dispatch.onCreate({ tag, mainText, img, location });
+    if (locationState) {
+      dispatch.onCreate({ tag, mainText, img, location: location.locate });
+    } else {
+    }
   };
 
   return (
@@ -42,7 +58,7 @@ const DiaryInputSet = ({ img, location }) => {
         }}
       />
       <br />
-      <Button innerText={<Link to="/">"등록"</Link>} onClick={createPin} />
+      <Button innerText={"등록"} onClick={createPin} />
       <br />
       <img src={img} />
     </div>

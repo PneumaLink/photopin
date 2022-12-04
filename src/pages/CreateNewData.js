@@ -1,44 +1,36 @@
 import { Link } from "react-router-dom";
 import WebCam from "../components/part/WebCam";
 import DiaryInputSet from "../components/DiaryInputSet";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
+export const locationContext = React.createContext();
 
 const CreateNewData = () => {
   const [img, setImg] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({ state: "ready" });
 
   useEffect(() => {
     const onSuccess = (result) => {
       const { coords } = result;
-      setLocation({ lat: coords.latitude, lng: coords.longitude });
+      setLocation({
+        state: "success",
+        locate: { lat: coords.latitude, lng: coords.longitude },
+      });
     };
     const onError = (err) => {
-      console.log(err);
+      console.log({ state: "error", message: err });
     };
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
-  useEffect(() => {
-    if (location) console.log(`location ${location.lat} : ${location.lng}`);
-    else {
-      console.log(location);
-    }
-  }, [location]);
-
   return (
-    <div>
-      <Link to="/">Go to Home</Link>
-      <h1>Create New Data</h1>
-      {img ? (
-        location ? (
-          <DiaryInputSet img={img} location={location} />
-        ) : (
-          <h1>위치정보 준비중...</h1>
-        )
-      ) : (
-        <WebCam setImg={setImg} />
-      )}
-    </div>
+    <locationContext.Provider value={{ location }}>
+      <div>
+        <Link to="/">Go to Home</Link>
+        <h1>Create New Data</h1>
+        {img ? <DiaryInputSet img={img} /> : <WebCam setImg={setImg} />}
+      </div>
+    </locationContext.Provider>
   );
 };
 
