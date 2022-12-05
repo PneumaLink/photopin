@@ -6,12 +6,13 @@ import React, { useReducer, useRef } from "react";
 import pinReducer from "./functions/pinReducer";
 import Detail from "./pages/Deatil";
 import Layout from "./components/Layout";
+import { getDummyData } from "./functions/tools";
 
 export const dayDataContext = React.createContext();
 export const DispatchFunctions = React.createContext();
 
 function App() {
-  const [pinList, pinDispatch] = useReducer(pinReducer, []);
+  const [pinList, pinDispatch] = useReducer(pinReducer, getDummyData(100));
 
   const dataId = useRef(0);
 

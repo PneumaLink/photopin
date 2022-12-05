@@ -26,7 +26,6 @@ const CreateNewData = () => {
   return (
     <locationContext.Provider value={{ location }}>
       <div>
-        <Link to="/">Go to Home</Link>
         <h1>Create New Data</h1>
         {img ? <DiaryInputSet img={img} /> : <WebCam setImg={setImg} />}
       </div>
