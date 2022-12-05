@@ -16,7 +16,10 @@ export const getDummyData = (quantitiy) => {
       mainText: "대충 아무 텍스트 - " + i.toString(),
       createTime: time,
       editTime: time,
-      location: { lat: lat, lng, lng },
+      location: {
+        state: "success",
+        locate: { lat: lat, lng, lng },
+      },
     });
 
     time = time + 3600000;

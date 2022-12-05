@@ -4,6 +4,8 @@ import DeatilViewer from "../components/DetailViewer";
 import PinInput from "../components/PinInput";
 import Button from "../components/part/Button";
 import { dayDataContext, DispatchFunctions } from "../App";
+import MapViewer from "../components/part/MapViewer";
+import { getRandomColor } from "../functions/tools";
 
 const Detail = () => {
   const { id } = useParams();
@@ -12,7 +14,7 @@ const Detail = () => {
   const tagList = useContext(dayDataContext).tagList;
   const [editMode, setEditMode] = useState(false);
   const [inputData, setInputData] = useState(null);
-  const pinDispatch = useContext(DispatchFunctions);
+  const pinDispatch = useContext(DispatchFunctions).pinDispatch;
 
   const navigate = useNavigate();
 
@@ -31,9 +33,7 @@ const Detail = () => {
   };
 
   const setOnClick = () => {
-    if (window.confirm("내용이 수정될거에요!")) {
-      const editTime = new Date();
-
+    if (window.confirm("내용이 수정될거에요!") && inputData) {
       pinDispatch({
         type: "EDIT",
         data: {
@@ -42,14 +42,14 @@ const Detail = () => {
           img: newData.img,
           mainText: inputData.mainText,
           createTime: newData.createTime,
-          editTime,
+          editTime: new Date(),
           location: newData.location,
         },
       });
-      console.log(newData.location);
+
       navigate("/");
     } else {
-      alert("잠시만 기다려주세요!");
+      alert("어라? input받은 데이터가 없네요?");
     }
   };
 
@@ -68,14 +68,18 @@ const Detail = () => {
         </>
       ) : (
         <>
-          <Button innerText={"수정 완료"} onClick={editEvent} />
-          <Button innerText={"취소"} onClick={removeEvent} />
           <PinInput
             img={newData.img}
             tagList={tagList}
             defaultText={newData.mainText}
             setInputData={setInputData}
             setOnClick={setOnClick}
+          />
+          <MapViewer
+            lat={newData.location.locate.lat}
+            lng={newData.location.locate.lng}
+            mainText={newData.mainText}
+            color={getRandomColor()}
           />
         </>
       )}

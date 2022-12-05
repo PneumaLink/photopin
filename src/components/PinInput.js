@@ -18,6 +18,7 @@ const PinInput = ({ img, tagList, defaultText, setInputData, setOnClick }) => {
       tag: tag,
       mainText: newMainText,
     });
+
     setOnClick();
   };
 

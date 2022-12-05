@@ -3,6 +3,8 @@ import { msToDate, getRandomColor } from "../functions/tools";
 
 const DeatilViewer = ({ data }) => {
   const date = msToDate(data.createTime);
+  const lat = data.location.locate.lat;
+  const lng = data.location.locate.lng;
 
   return (
     <div>
@@ -14,12 +16,9 @@ const DeatilViewer = ({ data }) => {
         {date.Seconds}
       </p>
       <img src={data.img} width="100%" alt="pinImage"></img>
-      <p>
-        Location : {data.location.lat} / {data.location.lng}
-      </p>
       <MapViewer
-        lat={data.location.lat}
-        lng={data.location.lng}
+        lat={lat}
+        lng={lng}
         mainText={data.mainText}
         color={getRandomColor()}
       />

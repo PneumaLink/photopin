@@ -10,7 +10,7 @@ const pinReducer = (state, action) => {
 
     case "EDIT": {
       return state.map((it) =>
-        it.id === action.targetId
+        it.id === action.data.id
           ? {
               id: it.id,
               createTime: it.createTime,

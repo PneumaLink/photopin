@@ -49,7 +49,7 @@ const CreateNewData = () => {
   };
 
   const setOnClick = () => {
-    if (location) {
+    if (location.state == "success") {
       onCreate();
       navigate("/");
     } else {
