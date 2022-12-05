@@ -8,7 +8,7 @@ export const getDummyData = (quantitiy) => {
     quantitiy = 30;
   }
 
-  for (let i = 0; i < quantitiy; i++) {
+  for (let i = quantitiy; i < quantitiy * 2; i++) {
     array.push({
       id: i,
       tag: "대충 아무 테그",
