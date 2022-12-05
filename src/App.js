@@ -1,64 +1,27 @@
 import "./style/App.css";
 import Home from "./pages/Home";
 import CreateNewData from "./pages/CreateNewData";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import React, { useReducer, useRef } from "react";
-import pinReducer from "./functions/pinReducer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { useReducer, useRef, useState } from "react";
 import Detail from "./pages/Deatil";
 import Layout from "./components/Layout";
 import { getDummyData } from "./functions/tools";
+import pinReducer from "./functions/pinReducer";
 
 export const dayDataContext = React.createContext();
 export const DispatchFunctions = React.createContext();
 
+const defaultTagList = ["일상", "운동", "특별", "중요"];
+
 function App() {
   const [pinList, pinDispatch] = useReducer(pinReducer, getDummyData(100));
+  const [tagList, setTagList] = useState(defaultTagList);
 
   const dataId = useRef(0);
 
-  const onInit = () => {
-    pinDispatch({ type: "INIT" });
-  };
-
-  const onCreate = ({ tag, img, mainText, location }) => {
-    const time = new Date();
-
-    pinDispatch({
-      type: "CREATE",
-      data: {
-        id: dataId.current,
-        tag: tag,
-        img: img,
-        mainText: mainText,
-        createTime: time,
-        editTime: time,
-        location: location,
-      },
-    });
-    dataId.current += 1;
-  };
-
-  const onEdit = ({ tag, img, mainText }) => {
-    const time = new Date();
-
-    pinDispatch({
-      type: "CREATE",
-      data: {
-        tag: tag,
-        img: img,
-        mainText: mainText,
-        editTime: time,
-      },
-    });
-  };
-
-  const onRemove = ({ targetId }) => {
-    pinDispatch({ type: "REMOVE", targetId: targetId });
-  };
-
   return (
-    <DispatchFunctions.Provider value={{ onCreate, onEdit, onEdit, onInit }}>
-      <dayDataContext.Provider value={{ pinList }}>
+    <DispatchFunctions.Provider value={{ setTagList, pinDispatch }}>
+      <dayDataContext.Provider value={{ pinList, tagList, dataId }}>
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>

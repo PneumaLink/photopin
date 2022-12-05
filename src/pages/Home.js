@@ -10,10 +10,10 @@ import DataViewer from "../components/DataViewer";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const goToCreateNewData = useNavigate();
+  const navigate = useNavigate();
 
   const onCreate = () => {
-    goToCreateNewData("/createNewData");
+    navigate("/createNewData");
   };
 
   return (
