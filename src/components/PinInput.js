@@ -4,7 +4,7 @@ import Button from "./part/Button";
 import Input from "./part/Input";
 import SelectBox from "./part/SelectBox";
 
-const PinInput = ({ img, tagList, defaultText, setInputData, setOnClick }) => {
+const PinInput = ({ img, tagList, defaultText, setInputData }) => {
   const [tag, setTag] = useState(tagList[0]);
   const [newMainText, setNewMainText] = useState(defaultText);
   const navigate = useNavigate();
@@ -18,8 +18,6 @@ const PinInput = ({ img, tagList, defaultText, setInputData, setOnClick }) => {
       tag: tag,
       mainText: newMainText,
     });
-
-    setOnClick();
   };
 
   const cancel = () => {

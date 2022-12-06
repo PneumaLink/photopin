@@ -5,7 +5,7 @@ import PinInput from "../components/PinInput";
 import Button from "../components/part/Button";
 import { dayDataContext, DispatchFunctions } from "../App";
 import MapViewer from "../components/part/MapViewer";
-import { getRandomColor } from "../functions/tools";
+import Home from "./Home";
 
 const Detail = () => {
   const { id } = useParams();
@@ -31,8 +31,8 @@ const Detail = () => {
     }
   };
 
-  const setOnClick = () => {
-    if (window.confirm("내용이 수정될거에요!") && inputData) {
+  useEffect(() => {
+    if (inputData && window.confirm("내용이 수정될거에요!")) {
       pinDispatch({
         type: "EDIT",
         data: {
@@ -45,12 +45,10 @@ const Detail = () => {
           location: newData.location,
         },
       });
-
-      navigate("/");
-    } else {
-      alert("어라? input받은 데이터가 없네요?");
+      setEditMode(false);
+      navigate("/detail/" + id);
     }
-  };
+  }, [inputData]);
 
   return (
     <div>
@@ -59,11 +57,7 @@ const Detail = () => {
         <>
           <Button innerText={"수정"} onClick={editEvent} />
           <Button innerText={"삭제"} onClick={removeEvent} />
-          {newData ? (
-            <DeatilViewer data={newData} />
-          ) : (
-            "데이터가 없네? 이럴리가 없는데?"
-          )}
+          {newData ? <DeatilViewer data={newData} /> : <Home />}
         </>
       ) : (
         <>
@@ -72,13 +66,12 @@ const Detail = () => {
             tagList={tagList}
             defaultText={newData.mainText}
             setInputData={setInputData}
-            setOnClick={setOnClick}
           />
           <MapViewer
             lat={newData.location.locate.lat}
             lng={newData.location.locate.lng}
             mainText={newData.mainText}
-            color={getRandomColor()}
+            color={"#000000"}
           />
         </>
       )}

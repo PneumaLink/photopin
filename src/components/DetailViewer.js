@@ -20,7 +20,7 @@ const DeatilViewer = ({ data }) => {
         lat={lat}
         lng={lng}
         mainText={data.mainText}
-        color={getRandomColor()}
+        color={"#000000"}
       />
     </div>
   );
