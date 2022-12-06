@@ -10,9 +10,11 @@ const CreateNewData = () => {
   const tagList = useContext(dayDataContext).tagList;
   const id = useContext(dayDataContext).dataId;
   const pinDispatch = useContext(DispatchFunctions).pinDispatch;
-  const [img, setImg] = useState(null);
+  const [userImg, setUserImg] = useState(null);
   const [location, setLocation] = useState({ state: "ready" });
   const [inputData, setInputData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,46 +31,43 @@ const CreateNewData = () => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
-  const onCreate = () => {
-    const time = new Date();
+  useEffect(() => {
+    if (location.state === "success" && inputData) {
+      const time = new Date();
 
-    pinDispatch({
-      type: "CREATE",
-      data: {
-        id: id.current,
-        tag: inputData.tag,
-        img,
-        mainText: inputData.mainText,
-        createTime: time,
-        editTime: time,
-        location,
-      },
-    });
+      pinDispatch({
+        type: "CREATE",
+        data: {
+          id: id.current,
+          tag: inputData.tag,
+          img: userImg,
+          mainText: inputData.mainText,
+          createTime: time,
+          editTime: time,
+          location,
+        },
+      });
 
-    id.current += 1;
-  };
-
-  const setOnClick = () => {
-    if (location.state == "success") {
-      onCreate();
+      id.current += 1;
       navigate("/");
-    } else {
-      alert("잠시만 기다려주세용!");
+    } else if (location.state === "ready" && inputData) {
+      setLoading(true);
     }
-  };
+  }, [inputData, location]);
 
   return (
     <locationContext.Provider value={{ location }}>
       <div>
         <h1>Create New Data</h1>
-        {!img ? (
-          <WebCam setImg={setImg} />
+        {loading ? (
+          <img src={require("../public/images/pin.gif")} />
+        ) : !userImg ? (
+          <WebCam setImg={setUserImg} />
         ) : (
           <PinInput
-            img={img}
+            img={userImg}
             tagList={tagList}
             setInputData={setInputData}
-            setOnClick={setOnClick}
             defaultText={""}
           />
         )}

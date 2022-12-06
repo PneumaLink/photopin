@@ -18,19 +18,6 @@ const Detail = () => {
 
   const navigate = useNavigate();
 
-  const editEvent = () => {
-    if (window.confirm("핀을 잠깐만 뽑을까요?")) {
-      setEditMode(true);
-    }
-  };
-
-  const removeEvent = () => {
-    if (window.confirm("핀을 뽑아버리겠습니까?")) {
-      pinDispatch({ type: "REMOVE", id: newData.id });
-      navigate("/");
-    }
-  };
-
   useEffect(() => {
     if (inputData && window.confirm("내용이 수정될거에요!")) {
       pinDispatch({
@@ -46,9 +33,23 @@ const Detail = () => {
         },
       });
       setEditMode(false);
+      setInputData(null);
       navigate("/detail/" + id);
     }
   }, [inputData]);
+
+  const editEvent = () => {
+    if (window.confirm("핀을 잠깐만 뽑을까요?")) {
+      setEditMode(true);
+    }
+  };
+
+  const removeEvent = () => {
+    if (window.confirm("핀을 뽑아버리겠습니까?")) {
+      pinDispatch({ type: "REMOVE", id: newData.id });
+      navigate("/");
+    }
+  };
 
   return (
     <div>

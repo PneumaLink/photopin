@@ -28,6 +28,9 @@ const PinInput = ({ img, tagList, defaultText, setInputData }) => {
     <div>
       Diary Input Set
       <br />
+      <Button innerText={"확인"} onClick={onClick} />
+      <Button innerText={"취소"} onClick={cancel} />
+      <br />
       테그
       <SelectBox
         name={"my select box"}
@@ -43,9 +46,6 @@ const PinInput = ({ img, tagList, defaultText, setInputData }) => {
           setNewMainText(e.target.value);
         }}
       />
-      <br />
-      <Button innerText={"확인"} onClick={onClick} />
-      <Button innerText={"취소"} onClick={cancel} />
       <br />
       <img src={img} />
     </div>
