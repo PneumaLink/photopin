@@ -22,7 +22,7 @@ const pinReducer = (state, action) => {
     }
 
     case "REMOVE": {
-      return state.filter((it) => it.id !== action.targetId);
+      return state.filter((it) => it.id !== action.id);
     }
 
     default: {

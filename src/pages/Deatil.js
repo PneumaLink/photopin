@@ -26,8 +26,7 @@ const Detail = () => {
 
   const removeEvent = () => {
     if (window.confirm("핀을 뽑아버리겠습니까?")) {
-      // window.open("exit.html", "Thanks for Visiting!");
-      alert("그동안 고마웠어요!");
+      pinDispatch({ type: "REMOVE", id: newData.id });
       navigate("/");
     }
   };
